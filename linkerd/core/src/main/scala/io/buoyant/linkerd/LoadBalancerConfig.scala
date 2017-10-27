@@ -14,7 +14,8 @@ import io.buoyant.config.PolymorphicConfig
   new Type(value = classOf[P2CEwma], name = "ewma"),
   new Type(value = classOf[Aperture], name = "aperture"),
   new Type(value = classOf[Heap], name = "heap"),
-  new Type(value = classOf[RoundRobin], name = "roundRobin")
+  new Type(value = classOf[RoundRobin], name = "roundRobin"),
+  new Type(value = classOf[ConsistentHash], name = "consistentHash")
 ))
 abstract class LoadBalancerConfig extends PolymorphicConfig {
   val factory: LoadBalancerFactory
@@ -65,5 +66,12 @@ case class RoundRobin(maxEffort: Option[Int]) extends LoadBalancerConfig {
   @JsonIgnore
   val factory = Balancers.roundRobin(
     maxEffort = maxEffort.getOrElse(Balancers.MaxEffort)
+  )
+}
+
+case class ConsistentHash(virtualNum: Option[Int]) extends LoadBalancerConfig {
+  @JsonIgnore
+  val factory = Balancers.consistentHash(
+    virtualNodeNum = virtualNum.getOrElse(5)
   )
 }

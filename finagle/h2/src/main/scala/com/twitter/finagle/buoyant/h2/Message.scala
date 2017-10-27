@@ -16,7 +16,7 @@ import com.twitter.util.{Future, Promise}
  * However, it is hoped that other types may be built upon / adapated
  * to satisfy a broader set of use cases.
  */
-sealed trait Message {
+sealed trait Message extends H2Header {
   def headers: Headers
   def stream: Stream
 

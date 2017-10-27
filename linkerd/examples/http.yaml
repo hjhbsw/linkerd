@@ -1,4 +1,7 @@
 # HTTP protocol
+admin:
+  ip: 0.0.0.0
+
 namers:
 - kind: io.l5d.fs
   rootDir: linkerd/examples/io.l5d.fs
@@ -22,3 +25,8 @@ routers:
     addForwardedHeader:
       by: {kind: "ip:port"}
       for: {kind: "ip"}
+  client:
+      loadBalancer:
+        kind: consistentHash
+        virtualNum: 2
+

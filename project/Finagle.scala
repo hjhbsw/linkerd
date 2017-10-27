@@ -12,7 +12,7 @@ object Finagle extends Base {
   val h2 = projectDir("finagle/h2")
     .dependsOn(buoyantCore)
     .withLibs(
-      Deps.netty4("codec-http2"), Deps.netty4("handler"), Deps.boringssl
+      Deps.netty4("codec-http2"), Deps.netty4("handler"), Deps.boringssl,Deps.finagle("core")
     )
     .withTests()
     .withE2e()
